@@ -1,12 +1,156 @@
-﻿<Window x:Class="LawerGUI.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LawerGUI"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+﻿<controls:MetroWindow x:Class="LawerGUI.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                      xmlns:local="clr-namespace:LawerGUI"
+                      mc:Ignorable="d"
+                      
+                      
+                      Title="" Height="620" Width="800"
+                      WindowStyle="None"
+                      AllowsTransparency="True"
+                      ShowTitleBar="True"
+                      WindowStartupLocation="CenterScreen"
+                      ResizeMode="CanMinimize"
+                      WindowTransitionsEnabled="False"
+                      BorderThickness="1"
+                      BorderBrush="{StaticResource PrimaryHueDarkBrush}"
+                      GlowBrush="{StaticResource PrimaryHueDarkBrush}"
+                      Background="{DynamicResource MaterialDesignBackground}"
+                      FontSize="15"
+                      Loaded="MetroWindow_Loaded">
+   
+    <controls:MetroWindow.WindowButtonCommands>
+        <controls:WindowButtonCommands Visibility="Visible"
+                                       Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}" />
+    </controls:MetroWindow.WindowButtonCommands>
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <StackPanel>
+
+            </StackPanel>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
+    <controls:MetroWindow.LeftWindowCommands>
+        <controls:WindowCommands>
+            <Menu HorizontalAlignment="Center"
+                  IsMainMenu="True" Background="#CC119EDA">
+                <MenuItem Header="_File"
+                      Background="#CC119EDA">
+                    <MenuItem Header="Open">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentSaveOutline" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Save">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentSaveOutline" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Exit" InputGestureText="Ctrl+E">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ExitToApp" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Settings"
+                              Background="#CC119EDA">
+                    <MenuItem Header="Parameters">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="MixerSettings" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </controls:WindowCommands>
+    </controls:MetroWindow.LeftWindowCommands>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+              HorizontalAlignment="Center"
+              Margin="5 5 5 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <RadioButton Grid.Column="0" IsChecked="True"
+                         Style="{DynamicResource MaterialDesignTabRadioButton}"
+                         Content="Sample text 1"
+                         Margin="20 0 20 0"
+                         x:Name="Sample1"
+                         BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
+            <RadioButton Grid.Column="1" IsChecked="False"
+                         Style="{DynamicResource MaterialDesignTabRadioButton}"
+                         Content="Sample text 2"
+                         Margin="20 0 20 0"
+                         BorderBrush="{DynamicResource PrimaryHueDarkBrush}"
+                         BorderThickness="5"
+                         x:Name="Sample2"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample1}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0"
+                      Background="#FF282A3E"
+                      Margin="4 0 2 0"
+                      >
+                    <Label Content="Fedral skill worker point gide"
+                           Foreground="White"
+                           Padding="10 0 0 0"
+                           VerticalContentAlignment="Center"
+                           x:Name="Column1"/>
+                </Grid>
+                <Grid Grid.Column="1"
+                      Background="#FF282A3E"
+                      Margin="2 0 2 0">
+
+                </Grid>
+                <Grid Grid.Column="2"
+                      Background="#FF282A3E"
+                      Margin="2 0 4 0">
+                    <Label Content="Point per factor"
+                           Foreground="White"
+                           Padding="10 0 0 0"
+                           VerticalContentAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel Name="QuizView"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" 
+              Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample2}">
+
+        </Grid>
+
+        <Rectangle VerticalAlignment="Top" 
+                   HorizontalAlignment= "Stretch" 
+                   Height="1" Fill="Gray" 
+                   />
+        <Rectangle VerticalAlignment="top" 
+                       HorizontalAlignment= "Stretch" 
+                       Height="1" 
+                       Margin="0 42 0 0" Fill="Gray"/>
+
     </Grid>
-</Window>
+</controls:MetroWindow>
