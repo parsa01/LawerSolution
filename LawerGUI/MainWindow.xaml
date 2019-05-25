@@ -23,7 +23,7 @@
                       FontSize="15"
                       Loaded="MetroWindow_Loaded">
    
-    <controls:MetroWindow.WindowButtonCommands>
+    <!--<controls:MetroWindow.WindowButtonCommands>
         <controls:WindowButtonCommands Visibility="Visible"
                                        Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}" />
     </controls:MetroWindow.WindowButtonCommands>
@@ -39,9 +39,10 @@
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
             <Menu HorizontalAlignment="Center"
-                  IsMainMenu="True" Background="#CC119EDA">
+                  IsMainMenu="True"
+                      Background="#FF3273F3">
                 <MenuItem Header="_File"
-                      Background="#CC119EDA">
+                      Background="#FF3273F3">
                     <MenuItem Header="Open">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="ContentSaveOutline" />
@@ -59,7 +60,7 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Settings"
-                              Background="#CC119EDA">
+                      Background="#FF3273F3">
                     <MenuItem Header="Parameters">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="MixerSettings" />
@@ -68,7 +69,7 @@
                 </MenuItem>
             </Menu>
         </controls:WindowCommands>
-    </controls:MetroWindow.LeftWindowCommands>
+    </controls:MetroWindow.LeftWindowCommands>-->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -135,8 +136,11 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
-                <StackPanel Name="QuizView"/>
+                <ScrollViewer>
+                    <StackPanel Name="QuizView"/>
+                </ScrollViewer>
             </Grid>
+            <Button Grid.Row="1" Content="Your Score" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" VerticalAlignment="Bottom" Margin="0 0 0 10" x:Name="Score"/>
         </Grid>
         <Grid Grid.Row="1" 
               Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample2}">

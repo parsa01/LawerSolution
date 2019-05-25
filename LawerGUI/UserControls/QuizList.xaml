@@ -24,14 +24,5 @@
                                 DisplayMemberBinding="{Binding Description}"/>
             </GridView>
         </ListView.View>
-        <!--<ListView.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Label Content="{Binding Quiz}"/>
-                    <CheckBox/>
-                    <Label Content="{Binding Description}"/>
-                </Grid>
-            </DataTemplate>
-        </ListView.ItemTemplate>-->
     </ListView>
 </UserControl>
