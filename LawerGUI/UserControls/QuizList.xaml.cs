@@ -22,24 +22,18 @@ namespace LawerGUI.UserControls
     public partial class QuizList : UserControl
     {
 
-        //public static readonly DependencyProperty GridWidth = DependencyProperty.Register(
-        //    "GridWidth", typeof(double), typeof(Grid), new PropertyMetadata(default(double)));
-
-        //public double GridWidthProperty
-        //{
-        //    get { return (double)GetValue(GridWidth); }
-        //    set { SetValue(GridWidth, value); }
-        //}
-
         public QuizList(QuizLists quizLists,double width)
         {
             InitializeComponent();
-            QuizHeader.Columns[0].Header = quizLists.Header1;
-            QuizHeader.Columns[2].Header = quizLists.Header2;
-            var buffer = quizLists.QuizeList;
-            QuizListView.ItemsSource = buffer;
-
+            HeaderCol1.Content = quizLists.Header1;
+            HeaderCol3.Content = quizLists.Header2;
             HeaderCol1.Width = width;
+
+            Header.Content = quizLists.Header1;
+
+            QuizListView.ItemsSource = quizLists.QuizeList;
+
+            
         }
     }
 }

@@ -9,28 +9,31 @@
                       mc:Ignorable="d"
                       
                       
+                      xmlns:valueConverter="clr-namespace:LawerGUI.Classes.ValueConverter"
                       Title="" Height="620" Width="800"
                       WindowStyle="None"
                       AllowsTransparency="True"
                       ShowTitleBar="True"
+                      WindowTitleBrush="#222b35"
                       WindowStartupLocation="CenterScreen"
                       ResizeMode="CanMinimize"
                       WindowTransitionsEnabled="False"
                       BorderThickness="1"
                       BorderBrush="{StaticResource PrimaryHueDarkBrush}"
                       GlowBrush="{StaticResource PrimaryHueDarkBrush}"
-                      Background="{DynamicResource MaterialDesignBackground}"
+                      Background="#FFE2DFDF"
                       FontSize="15"
                       Loaded="MetroWindow_Loaded">
-   
-    <!--<controls:MetroWindow.WindowButtonCommands>
-        <controls:WindowButtonCommands Visibility="Visible"
-                                       Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}" />
+    <controls:MetroWindow.Resources>
+        <valueConverter:BooleanToHeight x:Key="BooleanToHeight"/>
+    </controls:MetroWindow.Resources>
+    <controls:MetroWindow.WindowButtonCommands>
+        <controls:WindowButtonCommands Visibility="Visible" Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}"/>
     </controls:MetroWindow.WindowButtonCommands>
 
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <StackPanel>
+            <StackPanel Background="Gray">
 
             </StackPanel>
         </controls:WindowCommands>
@@ -38,65 +41,65 @@
 
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
-            <Menu HorizontalAlignment="Center"
+            <Menu HorizontalAlignment="Center" Foreground="White"
                   IsMainMenu="True"
-                      Background="#FF3273F3">
+                      Background="#222b35">
                 <MenuItem Header="_File"
-                      Background="#FF3273F3">
-                    <MenuItem Header="Open">
+                      Background="#222b35">
+                    <MenuItem Header="Open" Foreground="Black">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="ContentSaveOutline" />
+                            <materialDesign:PackIcon Kind="ContentSaveOutline"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Save">
+                    <MenuItem Header="Save" Foreground="Black">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="ContentSaveOutline" />
+                            <materialDesign:PackIcon Kind="ContentSaveOutline"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Exit" InputGestureText="Ctrl+E">
+                    <MenuItem Header="Exit" InputGestureText="Ctrl+E" Foreground="Black">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="ExitToApp" />
+                            <materialDesign:PackIcon Kind="ExitToApp"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Settings"
-                      Background="#FF3273F3">
-                    <MenuItem Header="Parameters">
+                      Background="#222b35">
+                    <MenuItem Header="Parameters" Foreground="Black">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="MixerSettings" />
+                            <materialDesign:PackIcon Kind="MixerSettings"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
             </Menu>
         </controls:WindowCommands>
-    </controls:MetroWindow.LeftWindowCommands>-->
+    </controls:MetroWindow.LeftWindowCommands>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0"
-              HorizontalAlignment="Center"
+        <Grid Grid.Row="0" Background="#abb9c9" HorizontalAlignment="Stretch"
               Margin="5 5 5 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0" IsChecked="True"
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Grid.Column="0" IsChecked="True"
                          Style="{DynamicResource MaterialDesignTabRadioButton}"
                          Content="Sample text 1"
                          Margin="20 0 20 0"
                          x:Name="Sample1"
                          BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
-            <RadioButton Grid.Column="1" IsChecked="False"
+                <RadioButton Grid.Column="1" IsChecked="False"
                          Style="{DynamicResource MaterialDesignTabRadioButton}"
                          Content="Sample text 2"
                          Margin="20 0 20 0"
                          BorderBrush="{DynamicResource PrimaryHueDarkBrush}"
                          BorderThickness="5"
                          x:Name="Sample2"/>
-
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="1" 
@@ -112,7 +115,7 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0"
-                      Background="#FF282A3E"
+                      Background="#222b35"
                       Margin="4 0 2 0"
                       >
                     <Label Content="Fedral skill worker point gide"
@@ -122,12 +125,12 @@
                            x:Name="Column1"/>
                 </Grid>
                 <Grid Grid.Column="1"
-                      Background="#FF282A3E"
+                      Background="#222b35"
                       Margin="2 0 2 0">
 
                 </Grid>
                 <Grid Grid.Column="2"
-                      Background="#FF282A3E"
+                      Background="#222b35"
                       Margin="2 0 4 0">
                     <Label Content="Point per factor"
                            Foreground="White"
@@ -136,25 +139,250 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
-                <ScrollViewer>
-                    <StackPanel Name="QuizView"/>
+                <ScrollViewer Margin="0 0 0 50" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Name="QuizView"/>
+                        <Expander materialDesign:ExpanderAssist.DownHeaderPadding="5" materialDesign:ExpanderAssist.UpHeaderPadding="5" Grid.Row="1" Margin="4 2 4 2" Style="{DynamicResource MaterialDesignExpander}" IsExpanded="False" Background="#333f4f" Foreground="White">
+                            <Expander.Header>
+                                <Grid>
+                                    <Label Name="Header" FontWeight="Bold" Foreground="White" Content="Official language" VerticalAlignment="Top"/>
+                                </Grid>
+                            </Expander.Header>
+                            <Grid Width="792" Height="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="1st  language"  Background="#FF5B9BD5" Margin="1" Width="350"/>
+                                        <Label Content="CLB7"  Background="#FF5B9BD5" Margin="1"/>
+                                        <Label Content="CLB8"  Background="#FF5B9BD5" Margin="1"/>
+                                        <Label Content="CLB5 or more"  Background="#FF5B9BD5" Margin="1"/>
+                                        <Label Content="   24   "  Background="#FF5B9BD5" Margin="1" Width="250"/>
+                                    </StackPanel>
+
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
+                                        <TextBlock>
+                                        Oral expression
+                                        </TextBlock>
+                                        <TextBlock>
+                                        Oral comprehension
+                                        </TextBlock>
+                                        <TextBlock>
+                                        Written comprehension
+                                        </TextBlock>
+                                        <TextBlock>
+                                        Written expression
+                                        </TextBlock>
+                                    </ListBox>
+                                    <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Margin="365 0 0 0">
+                                        <TextBlock>
+                                        4
+                                        </TextBlock>
+                                        <TextBlock>
+                                        4
+                                        </TextBlock>
+                                        <TextBlock>
+                                        4
+                                        </TextBlock>
+                                        <TextBlock>
+                                        4
+                                        </TextBlock>
+                                    </ListBox>
+                                    <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Margin="410 0 0 0">
+                                        <TextBlock>
+                                        5
+                                        </TextBlock>
+                                        <TextBlock>
+                                        5
+                                        </TextBlock>
+                                        <TextBlock>
+                                        5
+                                        </TextBlock>
+                                        <TextBlock>
+                                        5
+                                        </TextBlock>
+                                    </ListBox>
+                                    <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Margin="480 0 0 0">
+                                        <TextBlock>
+                                        6
+                                        </TextBlock>
+                                        <TextBlock>
+                                        6
+                                        </TextBlock>
+                                        <TextBlock>
+                                        6
+                                        </TextBlock>
+                                        <TextBlock>
+                                        6
+                                        </TextBlock>
+                                    </ListBox>
+                                    <Label Content="Maximum de 24" Background="#FF5B9BD5" HorizontalAlignment="Right" Padding="10 10 50 10"/>
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Label Content="Second language (CLB5 or more in all four skills)" Background="#FF5B9BD5"/>
+                                    <Label Content="Maximum de  4" Background="#FF5B9BD5" HorizontalAlignment="Right" Padding="0 5 50 0"/>
+                                </Grid>
+                            </Grid>
+                        </Expander>
+                    </Grid>
                 </ScrollViewer>
             </Grid>
-            <Button Grid.Row="1" Content="Your Score" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" VerticalAlignment="Bottom" Margin="0 0 0 10" x:Name="Score"/>
         </Grid>
         <Grid Grid.Row="1" 
               Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample2}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0"
+                      Background="#222b35"
+                      Margin="4 0 2 0"
+                      >
+                    <Label Content="Fedral skill worker point gide"
+                           Foreground="White"
+                           Padding="10 0 0 0"
+                           VerticalContentAlignment="Center"
+                           x:Name="Column2"/>
+                </Grid>
+                <Grid Grid.Column="1"
+                      Background="#222b35"
+                      Margin="2 0 2 0">
 
+                </Grid>
+                <Grid Grid.Column="2"
+                      Background="#222b35"
+                      Margin="2 0 4 0">
+                    <Label Content="Point per factor"
+                           Foreground="White"
+                           Padding="10 0 0 0"
+                           VerticalContentAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ScrollViewer Margin="0 0 0 50" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Name="QuizView1"/>
+                        <Expander materialDesign:ExpanderAssist.DownHeaderPadding="5" materialDesign:ExpanderAssist.UpHeaderPadding="5" Grid.Row="1" Margin="4 2 4 2" Style="{DynamicResource MaterialDesignExpander}" IsExpanded="False" Background="#333f4f" Foreground="White">
+                            <Expander.Header>
+                                <Grid>
+                                    <Label Name="Header1" FontWeight="Bold" Foreground="White" Content="Official language" VerticalAlignment="Top"/>
+                                </Grid>
+                            </Expander.Header>
+                            <Grid Width="792" Height="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="1st  language"  Background="#FF5B9BD5" Margin="1" Width="350"/>
+                                        <Label Content="CLB7"  Background="#FF5B9BD5" Margin="1"/>
+                                        <Label Content="CLB8"  Background="#FF5B9BD5" Margin="1"/>
+                                        <Label Content="CLB5 or more"  Background="#FF5B9BD5" Margin="1"/>
+                                        <Label Content="   24   "  Background="#FF5B9BD5" Margin="1" Width="250"/>
+                                    </StackPanel>
+
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
+                                        <TextBlock>
+                                        Oral expression
+                                        </TextBlock>
+                                        <TextBlock>
+                                        Oral comprehension
+                                        </TextBlock>
+                                        <TextBlock>
+                                        Written comprehension
+                                        </TextBlock>
+                                        <TextBlock>
+                                        Written expression
+                                        </TextBlock>
+                                    </ListBox>
+                                    <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Margin="365 0 0 0">
+                                        <TextBlock>
+                                        4
+                                        </TextBlock>
+                                        <TextBlock>
+                                        4
+                                        </TextBlock>
+                                        <TextBlock>
+                                        4
+                                        </TextBlock>
+                                        <TextBlock>
+                                        4
+                                        </TextBlock>
+                                    </ListBox>
+                                    <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Margin="410 0 0 0">
+                                        <TextBlock>
+                                        5
+                                        </TextBlock>
+                                        <TextBlock>
+                                        5
+                                        </TextBlock>
+                                        <TextBlock>
+                                        5
+                                        </TextBlock>
+                                        <TextBlock>
+                                        5
+                                        </TextBlock>
+                                    </ListBox>
+                                    <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Margin="480 0 0 0">
+                                        <TextBlock>
+                                        6
+                                        </TextBlock>
+                                        <TextBlock>
+                                        6
+                                        </TextBlock>
+                                        <TextBlock>
+                                        6
+                                        </TextBlock>
+                                        <TextBlock>
+                                        6
+                                        </TextBlock>
+                                    </ListBox>
+                                    <Label Content="Maximum de 24" Background="#FF5B9BD5" HorizontalAlignment="Right" Padding="10 10 50 10"/>
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Label Content="Second language (CLB5 or more in all four skills)" Background="#FF5B9BD5"/>
+                                    <Label Content="Maximum de  4" Background="#FF5B9BD5" HorizontalAlignment="Right" Padding="0 5 50 0"/>
+                                </Grid>
+                            </Grid>
+                        </Expander>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
         </Grid>
 
+        <Button Grid.Row="1" Content="Your Score" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" VerticalAlignment="Bottom" Margin="-110 0 0 10" x:Name="Score" Click="Score_Click" Background="#0070c0"/>
+        <Button Grid.Row="1" Content="Save" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" VerticalAlignment="Bottom" Margin="110 0 0 10" x:Name="Save" Background="#0070c0"/>
         <Rectangle VerticalAlignment="Top" 
                    HorizontalAlignment= "Stretch" 
-                   Height="1" Fill="Gray" 
+                   Height="1" Fill="CornflowerBlue" 
                    />
-        <Rectangle VerticalAlignment="top" 
+        <!--<Rectangle VerticalAlignment="top" 
                        HorizontalAlignment= "Stretch" 
                        Height="1" 
-                       Margin="0 42 0 0" Fill="Gray"/>
+                       Margin="0 42 0 0" Fill="Gray"/>-->
 
     </Grid>
 </controls:MetroWindow>
