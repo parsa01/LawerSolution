@@ -76,12 +76,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EE1C0134FA0B05D26A30F791F50DE665"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5102F129EEE54E3C92E7914D3B7119A5"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -115,6 +109,12 @@
         "OwnerKey" = "8:_404A99944DC4A0AF131B5434CF30E65A"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EE1C0134FA0B05D26A30F791F50DE665"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -133,6 +133,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -149,6 +165,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -419,9 +443,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:lawer "
+        "ProductName" = "8:EXPRESS ENTRY"
         "ProductCode" = "8:{218DB273-20A9-49C5-9CE3-F3F1C5BF771E}"
-        "PackageCode" = "8:{66851BA3-62A1-43AB-9AB2-9CE66524DC1A}"
+        "PackageCode" = "8:{29264B44-3FB9-4836-B6F5-4A9794218C83}"
         "UpgradeCode" = "8:{E3731C72-5ADA-4D51-BFC6-3D4D19CE4BA6}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -429,12 +453,12 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:wira"
+        "Manufacturer" = "8:EXPRESS ENTRY"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:lawer setup"
+        "Title" = "8:EXPRESS ENTRY SETUP"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:wira"
+        "ARPCONTACT" = "8:EXPRESS ENTRY"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -543,7 +567,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DE3C3D315E354FBE8FADA0120029D64E"
             {
-            "Name" = "8:Lawer"
+            "Name" = "8:EXPRESS ENTRY"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -557,7 +581,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EE7E8C0133404F6EB7023CC24642DECC"
             {
-            "Name" = "8:Lawer"
+            "Name" = "8:EXPRESS ENTRY"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

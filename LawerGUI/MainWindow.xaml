@@ -10,34 +10,65 @@
                       
                       
                       xmlns:valueConverter="clr-namespace:LawerGUI.Classes.ValueConverter"
-                      Title="" Height="620" Width="800"
+                      Title="" Height="761" Width="801" MinHeight="760" MinWidth="800" MaxHeight="1024" MaxWidth="2048"
                       WindowStyle="None"
-                      AllowsTransparency="True"
+                      AllowsTransparency="False"
                       ShowTitleBar="True"
                       WindowTitleBrush="#222b35"
                       WindowStartupLocation="CenterScreen"
-                      ResizeMode="CanMinimize"
+                      ResizeMode="CanResizeWithGrip"
                       WindowTransitionsEnabled="False"
+                      WindowState="Normal"
                       BorderThickness="1"
                       BorderBrush="{StaticResource PrimaryHueDarkBrush}"
                       GlowBrush="{StaticResource PrimaryHueDarkBrush}"
-                      Background="#FFE2DFDF"
+                      Background="White"
                       FontSize="15"
                       Loaded="MetroWindow_Loaded">
     <controls:MetroWindow.Resources>
+        <!--<Style TargetType="Border" x:Key="RacePitBorderStyle" >
+            <Style.Resources>
+                <LinearGradientBrush x:Key="BackBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#EF3132" Offset="0.1" />
+                    <GradientStop Color="#D62B2B" Offset="0.9" />
+                </LinearGradientBrush>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource BackBrush}"/>
+        </Style>
+
+        <DataTemplate x:Key="titleText">
+            <Border Style="{StaticResource RacePitBorderStyle}" Height="24">
+                <TextBlock Text="{Binding}" 
+                        Margin="4 0"
+                        VerticalAlignment="Center"
+                        Foreground="White"
+                        FontSize="11" 
+                        FontWeight="Normal"
+                        Width="{Binding
+                        RelativeSource={RelativeSource
+                        Mode=FindAncestor,
+                        AncestorType={x:Type Expander}},
+                        Path=ActualWidth}"
+                        TextWrapping="Wrap"/>
+            </Border>
+        </DataTemplate>
+
+        <Style TargetType="{x:Type Expander}">
+            <Setter Property="HeaderTemplate" Value="{StaticResource titleText}"/>
+        </Style>-->
         <valueConverter:BooleanToHeight x:Key="BooleanToHeight"/>
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.WindowButtonCommands>
         <controls:WindowButtonCommands Visibility="Visible" Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}"/>
     </controls:MetroWindow.WindowButtonCommands>
 
-    <controls:MetroWindow.RightWindowCommands>
+    <!--<controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <StackPanel Background="Gray">
 
             </StackPanel>
         </controls:WindowCommands>
-    </controls:MetroWindow.RightWindowCommands>
+    </controls:MetroWindow.RightWindowCommands>-->
 
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
@@ -76,49 +107,102 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#abb9c9" HorizontalAlignment="Stretch"
+        <StackPanel Grid.Row="0">
+            <StackPanel.Triggers>
+                <EventTrigger RoutedEvent="RadioButton.Click">
+                    <BeginStoryboard Name="MyBeginStoryboard">
+                        <Storyboard>
+                            <DoubleAnimation
+                                             Storyboard.TargetName="Grid1" 
+                                             Storyboard.TargetProperty="(Grid.Opacity)"
+                                             From="0.3" To="1" Duration="0:0:0.8" />
+                            <DoubleAnimation
+                                             Storyboard.TargetName="Grid2" 
+                                             Storyboard.TargetProperty="(Grid.Opacity)"
+                                             From="0.3" To="1" Duration="0:0:0.8" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </StackPanel.Triggers>
+            <Grid Grid.Row="0" Background="White" HorizontalAlignment="Stretch"
               Margin="5 5 5 5">
-            <Grid HorizontalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <RadioButton Grid.Column="0" IsChecked="True"
-                         Style="{DynamicResource MaterialDesignTabRadioButton}"
-                         Content="Sample text 1"
-                         Margin="20 0 20 0"
-                         x:Name="Sample1"
-                         BorderBrush="{DynamicResource PrimaryHueDarkBrush}"/>
-                <RadioButton Grid.Column="1" IsChecked="False"
-                         Style="{DynamicResource MaterialDesignTabRadioButton}"
-                         Content="Sample text 2"
-                         Margin="20 0 20 0"
-                         BorderBrush="{DynamicResource PrimaryHueDarkBrush}"
-                         BorderThickness="5"
-                         x:Name="Sample2"/>
-            </Grid>
-        </Grid>
+                <Grid HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton Grid.Column="0" IsChecked="True"
+                         x:Name="Sample1">
+                        <RadioButton.Template>
+                            <ControlTemplate>
+                                <Grid Height="55">
+                                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Background="#dcebfb"/>
+                                    <!--<Border BorderThickness="0 0 0 1" BorderBrush="Gray"/>-->
+                                    <Border BorderThickness="0 5 0 0" BorderBrush="#3CAEA3" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample1}"/>
 
-        <Grid Grid.Row="1" 
-              Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample1}">
+                                    <StackPanel Margin="0 2 0 0" VerticalAlignment="Center" Opacity="1" Panel.ZIndex="0">
+                                        <materialDesign:PackIcon Kind="Account" HorizontalAlignment="Center" Foreground="#222b35" Width="26" Height="26"/>
+                                        <Label FontSize="14" Margin="0 -3 0 0" Padding="10 0 10 0" Content="Singel candidate" Foreground="#222b35"/>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0 2 0 0" VerticalAlignment="Center" Opacity="0.85" Panel.ZIndex="2" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample1}">
+                                        <materialDesign:PackIcon Kind="Account" HorizontalAlignment="Center" Foreground="#3CAEA3" Width="26" Height="26"/>
+                                        <Label FontSize="14" Margin="0 -3 0 0" Padding="10 0 10 0" Content="Single candidate" Foreground="#3CAEA3"/>
+                                    </StackPanel>
+                                    
+                                    <Border Margin="1 5 1 0" Height="75" Background="White" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample1}"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </RadioButton.Template>
+                    </RadioButton>
+                    <RadioButton Grid.Column="1" IsChecked="False"
+                         Content="Couple candidate"
+                         BorderThickness="5"
+                         x:Name="Sample2">
+                        <RadioButton.Template>
+                            <ControlTemplate>
+                                <Grid Height="55">
+                                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Background="#dcebfb"/>
+                                    <!--<Border BorderThickness="0 0 0 1" BorderBrush="Gray"/>-->
+                                    <Border BorderThickness="0 5 0 0" BorderBrush="#3CAEA3" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample2}"/>
+
+                                    <StackPanel Margin="0 2 0 0" VerticalAlignment="Center" Opacity="1" Panel.ZIndex="0">
+                                        <materialDesign:PackIcon Kind="AccountMultiple" HorizontalAlignment="Center" Foreground="#222b35" Width="26" Height="26"/>
+                                        <Label FontSize="14" Margin="0 -3 0 0" Padding="10 0 10 0" Content="Couple candidate" Foreground="#222b35"/>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Margin="0 5 0 0" VerticalAlignment="Center" Opacity="0.85" Panel.ZIndex="2" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample2}">
+                                        <materialDesign:PackIcon Kind="AccountMultiple" HorizontalAlignment="Center" Foreground="#3CAEA3" Width="26" Height="26"/>
+                                        <Label FontSize="14" Margin="0 -3 0 0" Padding="10 0 10 0" Content="Couple candidate" Foreground="#3CAEA3"/>
+                                    </StackPanel>
+                                    
+                                    <Border Margin="1 5 1 0" Height="75" Background="White" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample2}"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </RadioButton.Template>
+                    </RadioButton>
+                </Grid>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="1" Name="Grid1" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample1}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0"
                       Background="#222b35"
                       Margin="4 0 2 0"
                       >
-                    <Label Content="Fedral skill worker point gide"
+                    <Label Content="Federal Skilled Worker Point Grid"
                            Foreground="White"
                            Padding="10 0 0 0"
                            VerticalContentAlignment="Center"
@@ -146,11 +230,23 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Name="QuizView"/>
-                        <Expander materialDesign:ExpanderAssist.DownHeaderPadding="5" materialDesign:ExpanderAssist.UpHeaderPadding="5" Grid.Row="1" Margin="4 2 4 2" Style="{DynamicResource MaterialDesignExpander}" IsExpanded="False" Background="#333f4f" Foreground="White">
+                        <Expander materialDesign:ExpanderAssist.DownHeaderPadding="5" Visibility="Hidden" materialDesign:ExpanderAssist.UpHeaderPadding="5" Grid.Row="1" Margin="4 2 4 2"  IsExpanded="False" Background="#333f4f" Foreground="White">
                             <Expander.Header>
                                 <Grid>
-                                    <Label Name="Header" FontWeight="Bold" Foreground="White" Content="Official language" VerticalAlignment="Top"/>
+                                    <Label Name="Header" Foreground="White" Content="Official language" VerticalAlignment="Top"/>
+                                    <Label Grid.Column="1" Name="HeaderPoint" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="0 0 5 0" Foreground="White" Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibilityConverter},ElementName=Expander1}"/>
                                 </Grid>
+                                <!--<DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Padding="0">
+                                            <materialDesign:PackIcon Kind="ChevronDown" Foreground="White"/>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>-->
                             </Expander.Header>
                             <Grid Width="792" Height="200">
                                 <Grid.RowDefinitions>
@@ -237,7 +333,7 @@
                 </ScrollViewer>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" 
+        <Grid Grid.Row="1" Name="Grid2"
               Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Sample2}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
@@ -281,7 +377,7 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Name="QuizView1"/>
-                        <Expander materialDesign:ExpanderAssist.DownHeaderPadding="5" materialDesign:ExpanderAssist.UpHeaderPadding="5" Grid.Row="1" Margin="4 2 4 2" Style="{DynamicResource MaterialDesignExpander}" IsExpanded="False" Background="#333f4f" Foreground="White">
+                        <Expander Visibility="Hidden" materialDesign:ExpanderAssist.DownHeaderPadding="5" materialDesign:ExpanderAssist.UpHeaderPadding="5" Grid.Row="1" Margin="4 2 4 2" Style="{DynamicResource MaterialDesignExpander}" IsExpanded="False" Background="#333f4f" Foreground="White">
                             <Expander.Header>
                                 <Grid>
                                     <Label Name="Header1" FontWeight="Bold" Foreground="White" Content="Official language" VerticalAlignment="Top"/>
@@ -373,8 +469,8 @@
             </Grid>
         </Grid>
 
-        <Button Grid.Row="1" Content="Your Score" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" VerticalAlignment="Bottom" Margin="-110 0 0 10" x:Name="Score" Click="Score_Click" Background="#0070c0"/>
-        <Button Grid.Row="1" Content="Save" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" VerticalAlignment="Bottom" Margin="110 0 0 10" x:Name="Save" Background="#0070c0"/>
+        <Button Grid.Row="1" Content="Your Score" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" VerticalAlignment="Bottom" Margin="-110 0 0 10" x:Name="Score" Click="Score_Click" Background="#616e8d"/>
+        <Button Grid.Row="1" Content="Save" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" VerticalAlignment="Bottom" Margin="110 0 0 10" x:Name="Save" Background="#616e8d"/>
         <Rectangle VerticalAlignment="Top" 
                    HorizontalAlignment= "Stretch" 
                    Height="1" Fill="CornflowerBlue" 

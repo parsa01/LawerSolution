@@ -25,10 +25,11 @@ namespace LawerGUI.UserControls
         public QuizList(QuizLists quizLists,double width)
         {
             InitializeComponent();
-            HeaderCol1.Content = quizLists.Header1;
-            HeaderCol3.Content = quizLists.Header2;
-            HeaderCol1.Width = width;
+            //HeaderCol1.Width = width;
+            //HeaderCol1.Content = quizLists.Header1;
+            //HeaderCol3.Content = quizLists.Header2;
 
+            HeaderPoint.Content = quizLists.Header2;
             Header.Content = quizLists.Header1;
 
             QuizListView.ItemsSource = quizLists.QuizeList;

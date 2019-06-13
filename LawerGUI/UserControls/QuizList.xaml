@@ -6,9 +6,13 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:main="clr-namespace:LawerGUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Padding="0 2 0 0">
+             d:DesignHeight="450" d:DesignWidth="801" Padding="0 2 0 0">
     <UserControl.Resources>
         <Style TargetType="{x:Type ListViewItem}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
+            </Style.Resources>
             <Style.Triggers>
                 <Trigger Property="ItemsControl.AlternationIndex" Value="1">
                     <Setter Property="Background" Value="#eaeff7" />
@@ -16,67 +20,226 @@
                 <!--<Trigger Property="ItemsControl.AlternationIndex" Value="0">
                     <Setter Property="Background" Value="#eaeff7" />
                 </Trigger>-->
-                <Trigger Property="ItemsControl.AlternationIndex" Value="2">
+                <!--<Trigger Property="ItemsControl.AlternationIndex" Value="2">
                     <Setter Property="Background" Value="#FFEAEFF7" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="LightBlue"/>
+                </Trigger>-->
+                <!--<Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Green"/>
+                    <Setter Property="Foreground" Value="Green"/>
                 </Trigger>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="CornflowerBlue"/>
-                </Trigger>
+                </Trigger>-->
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Expander Margin="4 2 4 2" Style="{DynamicResource MaterialDesignExpander}" Background="#333f4f"  Foreground="White" materialDesign:ExpanderAssist.DownHeaderPadding="5" materialDesign:ExpanderAssist.UpHeaderPadding="5">
-        <Expander.Header>
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Name="column1"/>
+            <Grid Grid.Column="1" Name="column2"/>
+            <Grid Grid.Column="2" Name="column3"/>
+        </Grid>
+        <Grid Margin="4 2 4 2">
+            <Border BorderBrush="White" BorderThickness="1" CornerRadius="3"/>
             <Grid>
-                <Label Name="Header" FontWeight="Bold" Foreground="White"/>
-            </Grid>
-        </Expander.Header>
-        <ListView Name="QuizListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding}">
-            <ListView.View>
-                <GridView x:Name="QuizHeader">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" ClipToBounds="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="{Binding ElementName=column3,Path=ActualWidth}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Name="tgButtonbackgound" Background="White">
+                        <ToggleButton Name="ExpanderTolgger" Padding="0" Panel.ZIndex="1" Content="{Binding ElementName=Header,Path=Content}">
+                            <ToggleButton.LayoutTransform>
+                                <ScaleTransform ScaleY="1"/>
+                            </ToggleButton.LayoutTransform>
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Grid>
+                                        <Label Name="IconBackground" Panel.ZIndex="1" Background="#e6e6ea" Width="60" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+                                            <Label.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform AngleX="-20"/>
+                                                    <RotateTransform/>
+                                                    <TranslateTransform X="-8"/>
+                                                </TransformGroup>
+                                            </Label.RenderTransform>
+                                        </Label>
+                                        <Label Name="HeaderTitle" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Padding="65 0 0 0" FontSize="18" FontWeight="Bold" Content="{TemplateBinding Content}"></Label>
+                                        <Grid Name="IconButton" Panel.ZIndex="2">
+                                            <materialDesign:PackIcon Name="Icon" Kind="ChevronDown" Width="24" Height="24" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black"/>
+                                        </Grid>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
 
-                    <GridViewColumn Width="495" >
-                        <GridViewColumn.Header>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Icon" Property="Foreground" Value="White"/>
+                                            <Setter TargetName="HeaderTitle" Property="Foreground" Value="#851e3e"/>
+                                            <Setter TargetName="IconBackground" Property="Background" Value="#651e3e"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="IconButton" Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)" From="1" To="-1" Duration="0:0:0.2" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Setter TargetName="IconButton" Property="LayoutTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleY="-1"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter TargetName="Icon" Property="Foreground" Value="White"/>
+                                            <Setter TargetName="HeaderTitle" Property="Foreground" Value="White"/>
+                                            <Setter TargetName="IconBackground" Property="Background" Value="#651e3e"/>
+                                            <Setter TargetName="HeaderTitle" Property="Background" Value="#851e3e"/>
+                                        </Trigger>
+
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="IconButton" Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)" From="-1" To="1" Duration="0:0:0.2" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Setter TargetName="IconButton" Property="LayoutTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleY="1"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+
+                    </Grid>
+                    <Grid Grid.Column="2" Name="HeaderPointbackgound" Background="#851e3e" Visibility="{Binding ElementName=ExpanderTolgger,Converter={StaticResource BooleanToVisibilityConverter},Path=IsChecked}">
+                        <Label Foreground="White" Content="{Binding ElementName=HeaderPoint,Path=Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" Visibility="{Binding ElementName=ExpanderTolgger,Converter={StaticResource BooleanToVisibilityConverter},Path=IsChecked}">
+                    <ListView Name="QuizListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding}">
+                        <!--<ListView.Background>
+                            <SolidColorBrush Color="Red"/>
+                        </ListView.Background>-->
+                        <ListView.View>
+
+                            <GridView x:Name="QuizHeader" ScrollViewer.VerticalScrollBarVisibility="Visible">
+
+                                <GridViewColumn Width="{Binding ElementName=column1,Path=ActualWidth}">
+                                    <!--<GridViewColumn.Header>
                             <Grid Background="#577493" Width="495">
                                 <Label x:Name="HeaderCol1" Content="HeaderCol1"  Padding="10 5 5 5" Foreground="White"/>
                             </Grid>
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Quiz}" Padding="10 5 5 5" TextWrapping="Wrap" Foreground="Black"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="100">
-                        <GridViewColumn.Header>
+                        </GridViewColumn.Header>-->
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+
+                                            <TextBlock Grid.Column="0" Text="{Binding Quiz}" Padding="10 5 5 5" TextWrapping="Wrap" Foreground="Black"/>
+
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="{Binding ElementName=column2,Path=ActualWidth}" >
+                                    <!--<GridViewColumn.Header>
                             <Grid Background="#577493" Width="100">
                                 <Label x:Name="HeaderCol2" Content=""  Padding="10 5 5 5" Foreground="White"/>
                             </Grid>
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox Margin="35 0 0 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="200">
-                        <GridViewColumn.Header>
-                            <Grid Background="#577493" Width="200">
+                        </GridViewColumn.Header>-->
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Margin="35 0 0 0"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="{Binding ElementName=column3,Path=ActualWidth}">
+                                    <!--<GridViewColumn.Header>
+                            <Grid Background="#577493" Width="175">
                                 <Label x:Name="HeaderCol3" Content="HeaderCol2"  Padding="10 5 5 5" Foreground="White"/>
                             </Grid>
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Description}" Padding="10 5 5 5" TextWrapping="Wrap" Foreground="Black" Margin="60 0 0 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Expander>
+                        </GridViewColumn.Header>-->
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Description}" Padding="10 5 5 5" TextWrapping="Wrap" Foreground="Black" Margin="60 0 0 0"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Expander Name="Expander1" Visibility="Hidden" Margin="4 2 4 2" Background="#333f4f"  Foreground="White" materialDesign:ExpanderAssist.DownHeaderPadding="5" materialDesign:ExpanderAssist.UpHeaderPadding="5">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Name="Header" Foreground="White"/>
+                    <Label Grid.Column="1" Name="HeaderPoint" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="0 0 5 0" Foreground="White" Visibility="{Binding IsExpanded,Converter={StaticResource BooleanToVisibilityConverter},ElementName=Expander1}"/>
+                </Grid>
+            </Expander.Header>
+            <!--<ListView Name="QuizListView"  ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding}">
+                <ListView.View>
+
+                    <GridView x:Name="QuizHeader">
+
+                        <GridViewColumn Width="{Binding ElementName=column1,Path=ActualWidth}">
+                            --><!--<GridViewColumn.Header>
+                            <Grid Background="#577493" Width="495">
+                                <Label x:Name="HeaderCol1" Content="HeaderCol1"  Padding="10 5 5 5" Foreground="White"/>
+                            </Grid>
+                        </GridViewColumn.Header>--><!--
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+
+                                    <TextBlock Grid.Column="0" Text="{Binding Quiz}" Padding="10 5 5 5" TextWrapping="Wrap" Foreground="Black"/>
+
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="{Binding ElementName=column2,Path=ActualWidth}" >
+                            --><!--<GridViewColumn.Header>
+                            <Grid Background="#577493" Width="100">
+                                <Label x:Name="HeaderCol2" Content=""  Padding="10 5 5 5" Foreground="White"/>
+                            </Grid>
+                        </GridViewColumn.Header>--><!--
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox Margin="35 0 0 0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="{Binding ElementName=column3,Path=ActualWidth}">
+                            --><!--<GridViewColumn.Header>
+                            <Grid Background="#577493" Width="175">
+                                <Label x:Name="HeaderCol3" Content="HeaderCol2"  Padding="10 5 5 5" Foreground="White"/>
+                            </Grid>
+                        </GridViewColumn.Header>--><!--
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}" Padding="10 5 5 5" TextWrapping="Wrap" Foreground="Black" Margin="60 0 0 0"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>-->
+        </Expander>
+    </Grid>
 </UserControl>
 
