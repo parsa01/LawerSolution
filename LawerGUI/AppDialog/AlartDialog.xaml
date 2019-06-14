@@ -28,9 +28,10 @@
                     <Label Content="Your Score" FontWeight="Bold" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </materialDesign:Card>
-            <Label Grid.Row="1" Content="Your text is here" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Grid.Row="2" Content="Score : 1000" FontWeight="Bold" FontSize="20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Grid.Row="1" Name="UserName" Content="Your text is here" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Grid.Row="2"  Name="UserScore"  Content="Score : 1000" FontWeight="Bold" FontSize="20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Button Grid.Row="3" Background="#FFAF3C43" Width="100" VerticalAlignment="Center" Content="ok" Foreground="White" Height="30" Click="BtnClose_Click"/>
         </Grid>
     </materialDesign:Card>
+
 </Window>

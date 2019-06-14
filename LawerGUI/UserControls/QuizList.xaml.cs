@@ -21,7 +21,7 @@ namespace LawerGUI.UserControls
     /// </summary>
     public partial class QuizList : UserControl
     {
-
+        private string _headerPoint;
         public QuizList(QuizLists quizLists,double width)
         {
             InitializeComponent();
@@ -29,11 +29,38 @@ namespace LawerGUI.UserControls
             //HeaderCol1.Content = quizLists.Header1;
             //HeaderCol3.Content = quizLists.Header2;
 
-            HeaderPoint.Content = quizLists.Header2;
+            HeaderPoint.Content = _headerPoint = quizLists.Header2;
             Header.Content = quizLists.Header1;
 
             QuizListView.ItemsSource = quizLists.QuizeList;
 
+            
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            if ((bool)checkBox.IsChecked)
+            {
+                var data = (checkBox.DataContext as Quizs);
+                HeaderPoint.Content = "Score: " + data.Description;
+                var bufferQuizs = QuizListView.ItemsSource as List<Quizs>;
+                bufferQuizs[bufferQuizs.FindIndex(x => x.Quiz.Equals(data.Quiz))].Check = true;
+                if ((string)NameBuffer.Content != "")
+                    bufferQuizs[bufferQuizs.FindIndex(x => x.Quiz.Equals(NameBuffer.Content as string))].Check = false;
+                NameBuffer.Content = data.Quiz;
+                QuizListView.ItemsSource = null;
+                QuizListView.ItemsSource = bufferQuizs;
+            }
+            else
+            {
+                HeaderPoint.Content = _headerPoint;
+                NameBuffer.Content = "";
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
             
         }
     }

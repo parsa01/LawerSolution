@@ -195,8 +195,8 @@ namespace LawerGUI
             QuizView1.Children.Add(list1);
 
             quizLists = new QuizLists();
-            quizLists.Header1 = "Experience";
-            quizLists.Header2 = "Maximum 15";
+            quizLists.Header1 = "Arranged employment ";
+            quizLists.Header2 = "Maximum 10";
             quizLists.QuizeList = new List<Quizs>();
             quizLists.QuizeList.Add(new Quizs()
             {
@@ -230,8 +230,8 @@ namespace LawerGUI
             QuizView1.Children.Add(list1);
 
             quizLists = new QuizLists();
-            quizLists.Header1 = "Age";
-            quizLists.Header2 = "Maximum 12";
+            quizLists.Header1 = "Adaptability";
+            quizLists.Header2 = "Maximum 10";
             quizLists.QuizeList = new List<Quizs>();
             quizLists.QuizeList.Add(new Quizs()
             {
@@ -277,9 +277,20 @@ namespace LawerGUI
 
         private void Score_Click(object sender, RoutedEventArgs e)
         {
-            AlartDialog alartDialog = new AlartDialog();
+            int score = 0;
+            foreach(QuizList child in QuizView.Children)
+            {
+                if ((child.HeaderPoint.Content as string).Contains("Score:"))
+                    score += int.Parse((child.HeaderPoint.Content as string).Replace("Score:", ""));
+            }
+            AlartDialog alartDialog = new AlartDialog(Username.Text,score);
             alartDialog.Owner = this;
             alartDialog.ShowDialog();
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Panel.SetZIndex(OverView, 0);
         }
     }
 }

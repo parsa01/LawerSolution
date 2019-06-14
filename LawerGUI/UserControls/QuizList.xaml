@@ -127,6 +127,7 @@
                     </Grid>
                     <Grid Grid.Column="2" Name="HeaderPointbackgound" Background="#851e3e" Visibility="{Binding ElementName=ExpanderTolgger,Converter={StaticResource BooleanToVisibilityConverter},Path=IsChecked}">
                         <Label Foreground="White" Content="{Binding ElementName=HeaderPoint,Path=Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1"/>
+                        <Label Visibility="Collapsed" Name="NameBuffer" Content=""/>
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1" Visibility="{Binding ElementName=ExpanderTolgger,Converter={StaticResource BooleanToVisibilityConverter},Path=IsChecked}">
@@ -160,7 +161,7 @@
                         </GridViewColumn.Header>-->
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <CheckBox Margin="35 0 0 0"/>
+                                            <CheckBox Margin="35 0 0 0" Click="CheckBox_Click" IsChecked="{Binding Check}"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

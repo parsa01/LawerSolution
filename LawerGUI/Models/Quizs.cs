@@ -11,5 +11,6 @@ namespace LawerGUI.Models
     {
         public string Quiz { get; set; }
         public string Description { get; set; }
+        public bool Check { get; set; }
     }
 }

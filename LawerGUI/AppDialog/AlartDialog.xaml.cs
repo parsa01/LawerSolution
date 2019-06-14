@@ -19,9 +19,11 @@ namespace LawerGUI.AppDialog
     /// </summary>
     public partial class AlartDialog : Window
     {
-        public AlartDialog()
+        public AlartDialog(string name,int score)
         {
             InitializeComponent();
+            UserName.Content = name;
+            UserScore.Content = "Score : " + score;
         }
        
         private void BtnClose_Click(object sender, RoutedEventArgs e)
